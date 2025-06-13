@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reports – Optical CRM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      padding: 40px 20px;
+    }
+
+    .reports-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .filter-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .filter-form input,
+    .filter-form select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .filter-form button {
+      background-color: #2980b9;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .filter-form button:hover {
+      background-color: #21618c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      color: #2c3e50;
+    }
+
+    tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .details-btn {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .details-btn:hover {
+      background-color: #1e8449;
+    }
+
+    @media (max-width: 768px) {
+      .filter-form {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reports-container">
+    <h2>📋 Patient Reports</h2>
+
+    <!-- 🔍 Filter Form -->
+    <form class="filter-form" onsubmit="filterPatients(event)">
+      <input type="text" id="filterName" placeholder="Name" />
+      <input type="tel" id="filterPhone" placeholder="Phone Number" />
+      <input type="text" id="filterAddress" placeholder="Address" />
+      <input type="date" id="filterDate" />
+      <input type="number" id="filterAge" placeholder="Age" />
+      <select id="filterGender">
+        <option value="">Gender</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- 🧾 Patient Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Date</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="patientTableBody">
+        <!-- Example data -->
+        <tr>
+          <td>Ravi Kumar</td>
+          <td>9876543210</td>
+          <td>28</td>
+          <td>Male</td>
+          <td>2025-06-12</td>
+          <td>Delhi</td>
+          <td><button class="details-btn" onclick="seeDetails('Ravi Kumar')">See Details</button></td>
+        </tr>
+        <tr>
+          <td>Anjali Mehta</td>
+          <td>9123456789</td>
+          <td>34</td>
+          <td>Female</td>
+          <td>2025-06-11</td>
+          <td>Mumbai</td>
+          <td><button class="details-btn" onclick="seeDetails('Anjali Mehta')">See Details</button></td>
+        </tr>
+        <!-- You can dynamically append rows from JavaScript -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    function seeDetails(name) {
+      alert("Showing details for " + name);
+      // In real use: window.location.href = 'patient-details.html?name=' + encodeURIComponent(name);
+    }
+
+    function filterPatients(e) {
+      e.preventDefault();
+      const name = document.getElementById("filterName").value.trim();
+      const phone = document.getElementById("filterPhone").value.trim();
+      const address = document.getElementById("filterAddress").value.trim();
+      const date = document.getElementById("filterDate").value;
+      const age = document.getElementById("filterAge").value.trim();
+      const gender = document.getElementById("filterGender").value;
+
+      alert("Searching for:\n" +
+        "Name: " + name + "\n" +
+        "Phone: " + phone + "\n" +
+        "Address: " + address + "\n" +
+        "Date: " + date + "\n" +
+        "Age: " + age + "\n" +
+        "Gender: " + gender);
+
+      // You can send this data to a backend API or filter from local data
+    }
+  </script>
+</body>
+</html>
