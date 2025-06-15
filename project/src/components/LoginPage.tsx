@@ -13,10 +13,14 @@ export default function LoginPage({ onLogin }: LoginPageProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate loading
     setTimeout(() => {
-      onLogin(username, password);
+      if (username === 'admin' && password === 'password') {
+        onLogin(username, password);
+      } else {
+        alert("Invalid credentials! Use admin / password");
+      }
       setIsLoading(false);
     }, 1000);
   };
